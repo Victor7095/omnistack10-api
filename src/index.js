@@ -1,11 +1,11 @@
 const cors = require("cors");
 const express = require("express");
 const mongoose = require("mongoose");
-const routes = require("/routes.js");
+const routes = require("./routes.js");
 
 const app = express();
 
-mongoose.connect("",{
+mongoose.connect("mongodb://localhost:27017/omni",{
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
