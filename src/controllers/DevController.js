@@ -18,7 +18,7 @@ module.exports = {
 
         if(dev) return res.json({message:"Dev já cadastrado!"});
 
-        const apiResponse = await axios.get(`https://api.github/users/${github_username}`);
+        const apiResponse = await axios.get(`https://api.github.com/users/${github_username}`);
 
         const { name = login, avatar_url, bio } = apiResponse.data;
 
@@ -45,7 +45,8 @@ module.exports = {
         return res.json(devs);
     },
     async destroy(req,res) {
-        const devs = await Dev.find();
-        return res.json(devs);
+        const { _id } = req.body;
+        const count = await Dev.deleteOne({_id});
+        return res.json(count);
     }
 };
