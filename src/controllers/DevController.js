@@ -41,8 +41,17 @@ module.exports = {
         return res.json(dev);
     },
     async update(req,res) {
-        const devs = await Dev.find();
-        return res.json(devs);
+        const { _id, name, techs } = req.body;
+        
+        const conditions = { _id };
+        const techsArray = parseStringAsArray(techs);
+        const update = { name, techs: techsArray };
+
+        const dev = await Dev.findOneAndUpdate( conditions, update, {
+            new: true
+        });
+        
+        return res.json(dev);
     },
     async destroy(req,res) {
         const { _id } = req.body;
